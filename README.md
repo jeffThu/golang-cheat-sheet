@@ -520,7 +520,7 @@ var s *Vertex = new(Vertex) // new creates a pointer to a new struct instance
 
 ## Interfaces
 ```go
-// interface declaration
+// interface(type set) declaration
 type Awesomizer interface {
     Awesomize() string
 }
@@ -532,6 +532,14 @@ type Foo struct {}
 func (foo Foo) Awesomize() string {
     return "Awesome!"
 }
+
+//interface type assertion
+var i interface{}="1"
+x:=i.(int) //panic: interface conversion: interface {} is string, not int
+fmt.Println(x)
+
+y,ok:=i.(int) // two-value dont arise panic
+fmt.Println(y,ok)//0,false
 ```
 
 ## Embedding
@@ -619,7 +627,7 @@ func main() {
 ## Channels
 ```go
 ch := make(chan int) // create a channel of type int
-ch <- 42             // Send a value to the channel ch.
+ch <- 42             // Send a value to the channel ch. This blocks until another goroutine read it 
 v := <-ch            // Receive a value from ch
 
 // Non-buffered channels block. Read blocks when no value is available, write blocks until there is a read.
