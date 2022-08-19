@@ -684,7 +684,7 @@ func doStuff(channelOut, channelIn chan int) {
   c <- "Hello, Panic!"
   // panic: send on closed channel
   ```
-- A receive from a closed channel returns the zero value immediately
+- A receive from a closed no-element channel returns the zero value immediately
 
   ```go
   var c = make(chan int, 2)
