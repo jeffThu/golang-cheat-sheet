@@ -696,6 +696,17 @@ func doStuff(channelOut, channelIn chan int) {
   }
   // 1 2 0
   ```
+ - A close to nil channel panics
+   ```go
+   var c chan int
+   close(c) //  panic: close of closed channel   
+   ```
+ - A close to had closed channel panics
+   ```go
+   var c2 = make(chan int)
+   close(c2)
+   close(c2) // panic: close of closed channel
+   ```
 
 ## Printing
 
