@@ -28,6 +28,7 @@
 13. [Interfaces](#interfaces)
 14. [Embedding](#embedding)
 15. [Errors](#errors)
+16. [Panic](#panic)
 16. [Concurrency](#concurrency)
     * [Goroutines](#goroutines)
     * [Channels](#channels)
@@ -601,6 +602,67 @@ func main() {
 	// All is good, use `val`.
 	fmt.Println(val)
 }
+```
+
+## Panic
+
+One goroutine panic without defer-recover will kill all goroutines. From jeffThu
+One goroutine panic with defer-recover will no impact other goroutines. From jeffThu
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	go func() {
+		panic("123")
+	}()
+	go func() {
+		<-time.After(time.Second * 2)
+		fmt.Println("abc")
+	}()
+	<-time.After(time.Second * 3)
+	fmt.Println("!@#")
+}
+```
+```bash
+PS C:\Users\Administrator\go\src>  go run  .\1.go
+panic: 123
+
+goroutine 19 [running]:
+main.main.func1()
+        C:/Users/Administrator/go/src/1.go:10 +0x27
+created by main.main
+        C:/Users/Administrator/go/src/1.go:9 +0x25
+exit status 2
+```
+
+```go
+func main() {
+	go func() {
+		defer func() {
+			if re := recover(); re != nil {
+				fmt.Println("re: ", re)
+			}
+		}()
+		panic("123")
+	}()
+	go func() {
+		<-time.After(time.Second * 2)
+		fmt.Println("abc")
+	}()
+	<-time.After(time.Second * 3)
+	fmt.Println("!@#")
+}
+```
+```bash
+PS C:\Users\Administrator\go\src>  go run  .\1.go
+re:  123
+abc
+!@#
 ```
 
 # Concurrency
