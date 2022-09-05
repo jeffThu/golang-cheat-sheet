@@ -607,6 +607,7 @@ func main() {
 ## Panic
 
 One goroutine panic without defer-recover will kill all goroutines. From jeffThu
+
 One goroutine panic with defer-recover will no impact other goroutines. From jeffThu
 ```go
 package main
