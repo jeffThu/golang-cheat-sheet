@@ -33,6 +33,7 @@
     * [Goroutines](#goroutines)
     * [Channels](#channels)
     * [Channel Axioms](#channel-axioms)
+    * [Mutex Axioms](#mutex-axioms) 
 17. [Printing](#printing)
 18. [Reflection](#reflection)
     * [Type Switch](#type-switch)
@@ -606,9 +607,11 @@ func main() {
 
 ## Panic
 
-One goroutine panic without defer-recover will kill all goroutines. From jeffThu
+#### follow content From jeffThu
 
-One goroutine panic with defer-recover will no impact other goroutines. From jeffThu
+One goroutine panic without defer-recover will kill all goroutines. 
+
+One goroutine panic with defer-recover will no impact other goroutines. 
 ```go
 package main
 
@@ -770,6 +773,18 @@ func doStuff(channelOut, channelIn chan int) {
    close(c2)
    close(c2) // panic: close of closed channel
    ```
+## Mutex Axioms
+
+#### follow content From jeffThu
+
+var mu sync.Mutex
+* mu.Lock():  the calling goroutine be blocked until the mutex is available.
+* mu.Unlock():  a run-time error if the mutex is not locked.
+
+var rwmu sync.RWMutex
+* rwmu:  the mutex can be held by an arbitrary number of readers or a single writer.
+* rwmu.Lock():  the calling goroutine be blocked if the lock is already locked for reading or writing
+* rwmu.RLock():  a blocked rwmu.Lock() blocks a rwmu.RLock().
 
 ## Printing
 
