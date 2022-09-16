@@ -447,6 +447,20 @@ for range time.Tick(time.Second) {
 
 ```
 
+`a[low:high]` slice expression
+
+```go
+//0 <= low <= high <= len(a) if a is array or string
+hi := 4
+a := [3]int{1, 2, 3}
+_ = a[:hi] //panic out of range
+
+//0 <= low <= high <= cap(a) if a is slice
+a := []int{1, 2}
+a = append(a, 3) //cap(a) = 4 after append
+_ = a[:hi]       //ok
+```
+
 ## Maps
 
 ```go
