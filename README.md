@@ -12,7 +12,7 @@
     * [Functions as values and closures](#functions-as-values-and-closures)
     * [Variadic Functions](#variadic-functions)
 5. [Built-in Types](#built-in-types)
-6. [Type Conversions](#type-conversions)
+6. [Type Conversions And Assertions](#type-conversions-and-assertions)
 7. [Packages](#packages)
 8. [Control structures](#control-structures)
     * [If](#if)
@@ -251,7 +251,7 @@ complex64 complex128
 
 All Go's predeclared identifiers are defined in the [builtin](https://golang.org/pkg/builtin/) package.  
 
-## Type Conversions
+## Type Conversions And Assertions
 ```go
 var i int = 42
 var f float64 = float64(i)
@@ -261,6 +261,12 @@ var u uint = uint(f)
 i := 42
 f := float64(i)
 u := uint(f)
+
+var v interface{} = 42
+str , _ := v.(string)//ok
+fmt.Println(str)//zero value ""
+
+str2:=v.(string)//panic: interface conversion: interface {} is int, not string
 ```
 
 ## Packages
