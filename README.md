@@ -781,6 +781,16 @@ func doStuff(channelOut, channelIn chan int) {
       fmt.Printf("%d ", <-c)
   }
   // 1 2 0
+  
+  ch := make(chan int, 2)
+  ch <- 1
+  ch <- 2
+  close(ch)
+  for i := range ch {
+      fmt.Println(i)
+  }
+  //1 2 
+
   ```
  - A close to nil channel panics
    ```go
