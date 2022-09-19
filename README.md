@@ -569,12 +569,14 @@ fmt.Println(y,ok)//0,false
 There is no subclassing in Go. Instead, there is interface and struct embedding.
 
 ```go
+//Interface Embedding
 // ReadWriter implementations must satisfy both Reader and Writer
 type ReadWriter interface {
     Reader
     Writer
 }
 
+//Struct Embedding
 // Server exposes all the methods that Logger has
 type Server struct {
     Host string
