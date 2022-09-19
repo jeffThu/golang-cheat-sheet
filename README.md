@@ -816,7 +816,7 @@ var mu sync.Mutex
 var rwmu sync.RWMutex
 * rwmu:  the mutex can be held by an arbitrary number of readers or a single writer.
 * rwmu.Lock():  the calling goroutine be blocked if the lock is already locked for reading or writing
-* rwmu.RLock():  a blocked rwmu.Lock() blocks a rwmu.RLock().
+* rwmu.RLock():  a has blocked rwmu.Lock() blocks a rwmu.RLock().
 
 ## Printing
 
