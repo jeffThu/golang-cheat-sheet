@@ -730,11 +730,6 @@ v, ok := <-ch
 
 // if ok is false, channel has been closed
 
-// Read from channel until it is closed
-for i := range ch {
-    fmt.Println(i)
-}
-
 // select blocks on multiple channel operations, if one unblocks, the corresponding case is executed
 func doStuff(channelOut, channelIn chan int) {
     select {
