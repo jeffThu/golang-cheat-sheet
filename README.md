@@ -389,7 +389,7 @@ there:
 
 ### Arrays
 ```go
-var a [10]int // declare an int array with length 10. Array length is part of the type!
+var a [10]int // declare an int array with length 10 and initialized by zero value. Array length is part of the type!
 a[3] = 42     // set elements
 i := a[3]     // read elements
 
