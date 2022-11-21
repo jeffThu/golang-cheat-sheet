@@ -449,6 +449,13 @@ a = make([]byte, 5)	// capacity is optional
 // create a slice from an array
 x := [3]string{"Лайка", "Белка", "Стрелка"}
 s := x[:] // a slice referencing the storage of x
+
+//Slice deep-copy
+s1 := []int{1, 2, 3}
+s2 := make([]int, len(s1))
+var s3 []int
+copy(s2, s1) // use built-in copy function
+s3 = append(s3, s1...) // or use built-in append function
 ```
 
 ### Operations on Arrays and Slices
