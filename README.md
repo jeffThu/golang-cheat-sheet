@@ -347,7 +347,7 @@ there:
 ```
 
 no-range vs range
-* the biggest diff is whether copy element or not, which impacts performance!
+* The biggest diff is whether copy element or not, which impacts performance!
 ```go
 
 type bigObject struct {
