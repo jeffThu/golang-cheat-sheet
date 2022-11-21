@@ -317,7 +317,6 @@ func main() {
     }
     for { // you can omit the condition ~ while (true)
     }
-    
     // use break/continue on current loop
     // use break/continue with label on outer loop
 here:
@@ -345,6 +344,36 @@ there:
             }
         }
     }
+```
+
+no-range vs range
+* the biggest diff is whether copy element or not, which impacts performance!
+```go
+
+type bigObject struct {
+	f1 [1 << 20]int64 //64M
+}
+
+func main() {
+	s := [50]bigObject{}
+	start := time.Now()
+	for _, v := range s { // v is assigned by each element of s. This is a time-cost operation for big object
+		_ = v
+	}
+	elapsed := time.Since(start)
+	fmt.Println("range elapsed: ", elapsed)
+
+	start = time.Now()
+	for i := 0; i <= len(s)-1; i++ { // no copy
+		_ = s[i]
+	}
+	elapsed = time.Since(start)
+	fmt.Println("no-range elapsed: ", elapsed)
+}
+/*
+range elapsed： 868.224ms
+no-range elapsed： 0s
+*/
 ```
 
 ### Switch
