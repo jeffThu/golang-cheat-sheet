@@ -11,6 +11,9 @@
 4. [Functions](#functions)
     * [Functions as values and closures](#functions-as-values-and-closures)
     * [Variadic Functions](#variadic-functions)
+5. [Methods](#methods)
+    * [Value-receiver methods Vs pointer-receiver methods](#value-receiver-methods-vs-pointer-receiver-methods)
+    * [Implement interface](#implement-interface)
 5. [Built-in Types](#built-in-types)
 6. [Type Conversions And Assertions](#type-conversions-and-assertions)
 7. [Packages](#packages)
@@ -228,6 +231,45 @@ func adder(args ...int) int {
 		total += v
 	}
 	return total
+}
+```
+## Methods
+### Value-receiver methods Vs pointer-receiver methods
+```go
+type Integer int
+
+func (Integer) vmeth()  {}
+func (*Integer) pmeth() {}
+
+func main(){
+	//a value-varable call pointer-receiver method
+	var v Integer
+	v.pmeth() //ok. Go interprets to (&v).pmeth() as a convenience.
+
+	//a pointer-varable call value-receiver method
+	var p *Integer = new(Integer)
+	p.vmeth() //ok.  Go interprets to (*p).vmeth() as a convenience.
+}
+```
+### Implement interface
+```go
+type I interface {
+	f()
+}
+
+type S struct{}
+
+func (S) f() {}
+
+type S2 struct{}
+
+func (*S2) f() {}
+
+func main(){
+	var _ I = new(S) //ok
+	var _ I = S{}    //ok
+	var _ I = new(S2) //ok
+	var _ I = S2{}    //compile fail. missing method f
 }
 ```
 
