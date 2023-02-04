@@ -893,7 +893,7 @@ func doStuff(channelOut, channelIn chan int) {
 
 var mu sync.Mutex
 * mu.Lock():  the calling goroutine be blocked until the mutex is available.
-* mu.Unlock():  a run-time error if the mutex is not locked.
+* mu.Unlock():  a fatal error if the mutex is not locked.
 
 var rwmu sync.RWMutex
 * rwmu:  the mutex can be held by an arbitrary number of readers or a single writer.
