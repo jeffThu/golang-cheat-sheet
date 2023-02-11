@@ -292,11 +292,11 @@ complex64 complex128
 ```
 ### 字符类型
 ```go
-//golang字符常量/变量的类型本质是uint8 或者 int32
-char1, char2 := 'A', '中'                                                       //equal: var char1, char2 rune = 'A', '中'
-fmt.Println(reflect.TypeOf(char1), reflect.TypeOf(char2), reflect.TypeOf('B')) //int32 int32 int32
+// golang字符常量/变量的类型本质是uint8 或者 int32
+char1, char2 := 'A', '中'                                                                            //equal: var char1, char2 rune = 'A', '中'
+fmt.Println(reflect.TypeOf(char1).Name(), reflect.TypeOf(char2).Name(), reflect.TypeOf('B').Name()) //int32 int32 int32
 var char3 byte = 'A'
-fmt.Println(reflect.TypeOf(char3)) //uint8
+fmt.Println(reflect.TypeOf(char3).Name()) //uint8
 ```
 
 All Go's predeclared identifiers are defined in the [builtin](https://golang.org/pkg/builtin/) package.  
